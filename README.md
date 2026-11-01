@@ -1,23 +1,48 @@
-Bubble Sort Visualiser
-A GUI Python app built with CustomTkinter and Tkinter Canvas that animates a bubble sort on a shuffled bar chart.
+## Bubble Sort Visualiser
+A desktop bubble sort visualiser built with CustomTkinter and a Tkinter Canvas. It draws a shuffled list of values as bars and animates the bubble sort process one comparison at a time.
 
-Concepts Used
-Tkinter Canvas — create_rectangle draws each bar, redrawn every step via draw_bars().
+## Features
+Bar Chart Display — Draws 30 bars on a tk.Canvas, with each bar's height representing its value.
 
-root.after() — schedules the next comparison every 50ms, turning a fast sort into a visible animation.
+Random Shuffle — Randomly reorders the values at startup and whenever Shuffle is pressed.
 
-Global Index Tracking — i and j track the bubble sort's pass and comparison position across calls.
+Step-by-Step Sort — Compares and swaps adjacent bars one pair at a time, updating the display after each step.
 
-Features
-Animated Sorting — bars swap in real time, with the two being compared highlighted in a lighter blue.
+Highlighting — Shows the two bars currently being compared in a lighter blue.
 
-Shuffle & Reset — reshuffles the bars and resets the sort indices so you can replay.
+Animated Delay — Uses root.after(50, sort) so the sorting is visible rather than instant.
 
-Completion State — the status label updates to "Sorted!" and disables the sort button when finished.
+Sort Complete — Disables the Sort button and shows "Sorted!" when the list is in order.
 
-Improvements
-Use after_cancel on Shuffle — shuffling mid-sort leaves the old after callback running, causing two sort loops to race; cancel any pending job first.
+Custom Theme — Dark navy background with blue accents applied to both the Canvas and CustomTkinter widgets.
 
-Merge the Advance Logic — the index-advance check runs before the swap, so the last comparison of each pass is skipped; reorder so the swap happens, then advance.
+## Technologies Used
+text
+| Technology | Purpose |
+|---|---|
+| Python | Application logic |
+| `customtkinter` | Buttons and labels |
+| `tkinter.Canvas` | Draws the bars |
+| `random.shuffle()` | Randomises the bar order |
+| `root.after()` | Schedules the next sort step |
+| `global` | Tracks the `i` and `j` loop indices |
+| `create_rectangle()` | Renders each bar |
+<!-- -->
+## How to Use It
+Install Python 3.6 or newer from python.org and make sure it's added to your PATH.
 
-Highlight Sorted Portion — only the active pair is coloured; shading the already-sorted tail would make progress clearer.
+Install CustomTkinter by running pip install customtkinter.
+
+Save the code as bubble_sort.py.
+
+Open a terminal in the folder containing the file.
+
+Run python bubble_sort.py.
+
+Press Sort to watch the animation, then Shuffle to try again with a new order.
+
+## Improvements
+Add a speed slider — the 50ms delay is hardcoded; a slider that changes the value passed to root.after() would let the user slow the animation down or speed it up.
+
+Reset the indices on Shuffle — shuffle() resets i and j, but if the Sort button is pressed while a sort is mid-way through, the pending root.after call still fires and continues the old sort; cancelling the scheduled call with root.after_cancel() on shuffle would prevent overlapping sorts.
+
