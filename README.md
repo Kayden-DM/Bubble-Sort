@@ -17,7 +17,6 @@ Sort Complete — Disables the Sort button and shows "Sorted!" when the list is 
 Custom Theme — Dark navy background with blue accents applied to both the Canvas and CustomTkinter widgets.
 
 ## Technologies Used
-text
 | Technology | Purpose |
 |---|---|
 | Python | Application logic |
